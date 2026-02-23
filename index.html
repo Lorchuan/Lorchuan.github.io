@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>街头麦克风 - 我们的采访成果展</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">🎤 街头麦克风</div>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#interview">最新访谈</a>
+            <a href="#data">街坊数据</a>
+            <a href="#join">参与调查</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main class="main-content" id="interview">
+            <h1>【街头采访】现在的年轻人，真的“躺平”了吗？</h1>
+            <p class="meta">发布时间：2026年2月22日 | 记者：陶之艺与你的团队</p>
+            
+            <div class="video-container">
+                <iframe src="//player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+                </iframe>
+            </div>
+
+            <article class="article-body">
+                <p>上周末，我们带着镜头走上了街头，随机采访了50位不同行业的路人。关于“躺平”这个词，大家给出了截然不同的答案...</p>
+                <p>有人认为这是一种自我保护的机制，也有人觉得这只是一时的情绪宣泄。在镜头前，一位刚下班的程序员告诉我们：“其实大家不是不想奋斗，只是希望能看到奋斗的希望。”</p>
+                <p>（这里你可以发挥你的文采，继续排版你们的采访稿。可以分段落、加粗重点等。）</p>
+            </article>
+        </main>
+
+        <aside class="sidebar" id="data">
+            <div class="widget">
+                <h3>📊 街坊数据洞察</h3>
+                <p>对于“你目前的状态”，大家的真实选择：</p>
+                <div id="pie-chart" style="width: 100%; height: 250px;"></div>
+            </div>
+
+            <div class="widget" id="join">
+                <h3>📝 说出你的想法</h3>
+                <p>你想参与我们的下一期话题吗？点击下方完成快速问卷：</p>
+                <a href="https://www.wjx.cn/" target="_blank" class="survey-btn">参与调查问卷</a>
+            </div>
+        </aside>
+    </div>
+
+    <section class="comments-section">
+        <h2>网友热评</h2>
+        <p style="text-align: center; color: #888;">[这里是 Giscus 留言板代码占位符，配置好后大家可以直接用 GitHub 账号在网页留言]</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 街头麦克风. Designed by 你 & Coded by 陶之艺.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
