@@ -1,50 +1,106 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. 数据源配置（你们后续可以直接把 Notebook 里的词替换进来）
+    // 导入基于访谈记录提取的真实关键词与权重
     let wordData = {
         station: [
-            { name: '快捷支付', value: 100 },
-            { name: '扫码乘车', value: 80 },
-            { name: '人脸识别', value: 60 }
-        ],
-        hospital: [
-            { name: '辅助诊断', value: 100 },
-            { name: '医疗建议', value: 90 },
-            { name: '提高效率', value: 60 }
+            { name: '手机“滴”一下', value: 95 },
+            { name: '碰一碰', value: 90 },
+            { name: '告别实体公交卡', value: 85 },
+            { name: '无感支付', value: 85 },
+            { name: '自动化交通系统', value: 80 },
+            { name: '不用数现金找零', value: 75 },
+            { name: '车站全覆盖空调', value: 65 },
+            { name: '多语言播报', value: 60 },
+            { name: '缩短通勤时间', value: 55 },
+            { name: '拉近心理距离', value: 50 },
+            { name: '刷脸乘车', value: 45 }
         ],
         hawker: [
-            { name: '扫码点餐', value: 100 },
+            { name: '告别钱包钥匙', value: 95 },
+            { name: '扫码点单', value: 90 },
+            { name: '追求极致效率', value: 85 },
             { name: '缺少人情味', value: 85 },
-            { name: '怀念人工', value: 60 }
+            { name: 'Kiasu(怕输)文化', value: 80 },
+            { name: '自动化点单机', value: 75 },
+            { name: 'App打折优惠', value: 70 },
+            { name: '机器取代咖啡师', value: 65 },
+            { name: '跟风怕吃亏', value: 60 },
+            { name: '询问食材新鲜度', value: 50 },
+            { name: '询问菜品口味', value: 50 }
         ],
-        community: [
-            { name: '年轻人教老人', value: 100 },
-            { name: '社区互助', value: 80 },
-            { name: '老龄化适应', value: 60 }
+        home: [
+            { name: '扫地机器人', value: 100 },
+            { name: 'Singpass数字身份', value: 95 },
+            { name: '解决家务烦恼', value: 90 },
+            { name: '手机办理政务', value: 85 },
+            { name: '老人跌倒一键报警', value: 80 },
+            { name: '适老化大字号', value: 70 },
+            { name: '极简操作页面', value: 65 },
+            { name: '智能洗衣机', value: 60 },
+            { name: '躺沙发看电视', value: 55 },
+            { name: '识别图片内容', value: 50 },
+            { name: '早上语音叫醒', value: 45 }
+        ],
+        workplace: [
+            { name: '消除重复性工作', value: 100 },
+            { name: 'ChatGPT', value: 95 },
+            { name: '拒绝替代人工', value: 90 },
+            { name: 'DeepSeek', value: 85 },
+            { name: '自动回邮件', value: 85 },
+            { name: '担忧AI说假话', value: 80 },
+            { name: '工作成果专业化', value: 75 },
+            { name: '机器翻译', value: 70 },
+            { name: '辅助维修工作', value: 65 },
+            { name: 'Copilot', value: 60 },
+            { name: '豆包', value: 60 },
+            { name: '总结文献', value: 55 },
+            { name: '查找工作邮件', value: 50 }
         ],
         school: [
-            { name: '教学辅助', value: 100 },
-            { name: '节约成本', value: 80 },
-            { name: '创新思路', value: 60 }
+            { name: '秒解不会难题', value: 95 },
+            { name: '充当学习小帮手', value: 90 },
+            { name: '颠覆传统教法', value: 85 },
+            { name: '担忧不良内容渗透', value: 80 },
+            { name: '节约教育成本', value: 75 },
+            { name: '改变未来规划', value: 70 },
+            { name: '提供全新解题思路', value: 65 },
+            { name: 'AI描述生成图片', value: 60 },
+            { name: '网上查阅资料', value: 55 },
+            { name: '制作爱心义卖海报', value: 50 },
+            { name: '智能白板', value: 45 }
+        ],
+        hospital: [
+            { name: '人类医生把关决策', value: 95 },
+            { name: '隐私与效率的折中', value: 95 },
+            { name: '享受极致便利', value: 90 },
+            { name: '人机协作共存', value: 90 },
+            { name: 'AI辅助问诊建言', value: 85 },
+            { name: '接受位置轨迹追踪', value: 85 },
+            { name: '年轻人反哺教老人', value: 80 },
+            { name: '消费习惯记录', value: 70 },
+            { name: '税收政策秒回', value: 65 },
+            { name: '分析病人综合资料', value: 60 },
+            { name: '担忧身份证号泄露', value: 55 },
+            { name: '仔细阅读隐私条款', value: 50 }
         ]
     };
 
     const locNames = {
-        station: '🚆 车站',
-        hospital: '🏥 医院',
-        hawker: '🍜 小贩中心',
-        community: '🏘️ 社区中心',
-        school: '🏫 学校'
+        station: '🚆 交通车站',
+        hawker: '☕ 餐饮小贩',
+        home: '🏠 居家生活',
+        workplace: '🏢 办公场所',
+        school: '🏫 学校教育',
+        hospital: '🏥 医疗政务'
     };
 
     let currentLoc = null;
     let chartDom = document.getElementById('word-cloud-container');
     let myChart = echarts.init(chartDom);
 
-    // 2. 渲染词云的函数
     function renderCloud(locKey) {
         if (!locKey || !wordData[locKey]) return;
         
-        document.getElementById('cloud-title').innerText = `${locNames[locKey]} 的专属词云`;
+        document.getElementById('cloud-title').innerText = `${locNames[locKey]} 的高频词云`;
         
         let option = {
             tooltip: { show: true },
@@ -56,21 +112,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: 'center',
                 width: '100%',
                 height: '100%',
-                sizeRange: [16, 55], // 控制字体大小范围
+                sizeRange: [14, 65], // 拉大字体范围，凸显权重差异
                 rotationRange: [-45, 45],
                 rotationStep: 45,
                 gridSize: 10,
                 drawOutOfBound: false,
                 textStyle: {
                     color: function () {
-                        // 生成偏蓝/紫/绿的现代感颜色
-                        const colors = ['#2b6cb0', '#2c5282', '#3182ce', '#38b2ac', '#4fd1c5', '#667eea'];
+                        // 使用一组具有现代感、科技感的色系
+                        const colors = ['#2b6cb0', '#2c5282', '#3182ce', '#38b2ac', '#4fd1c5', '#667eea', '#805ad5', '#e53e3e', '#d69e2e'];
                         return colors[Math.floor(Math.random() * colors.length)];
                     }
                 },
                 emphasis: {
                     focus: 'self',
-                    textStyle: { textShadowBlur: 8, textShadowColor: 'rgba(0,0,0,0.2)' }
+                    textStyle: { textShadowBlur: 8, textShadowColor: 'rgba(0,0,0,0.3)' }
                 },
                 data: wordData[locKey]
             }]
@@ -78,51 +134,40 @@ document.addEventListener('DOMContentLoaded', function() {
         myChart.setOption(option);
     }
 
-    // 3. 监听 Icon 悬停事件
     const icons = document.querySelectorAll('.icon-item');
     icons.forEach(icon => {
         icon.addEventListener('mouseenter', function() {
-            // 移除所有图标的激活状态
             icons.forEach(i => i.classList.remove('active'));
-            // 给当前悬停的图标加上激活状态
             this.classList.add('active');
             
             currentLoc = this.getAttribute('data-loc');
-            
-            // 同步更新右侧表单的下拉菜单，方便用户直接添加
             document.getElementById('loc-select').value = currentLoc; 
-            
-            // 渲染词云
             renderCloud(currentLoc);
         });
     });
 
-    // 4. 监听补充关键词功能
     document.getElementById('add-word-btn').addEventListener('click', function() {
         const targetLoc = document.getElementById('loc-select').value;
         const inputEl = document.getElementById('new-word-input');
         const newWord = inputEl.value.trim();
 
         if (newWord !== '') {
-            // 插入新词，给一个较高的初始权重(95)让它显眼
-            wordData[targetLoc].push({ name: newWord, value: 95 });
+            // 用户新增词汇默认赋予较高权重以便立即显现
+            wordData[targetLoc].push({ name: newWord, value: 85 }); 
             
-            // 如果用户正在看这个地点的词云，立刻刷新让他看到效果
             if (currentLoc === targetLoc) {
                 renderCloud(targetLoc);
             }
 
-            // 清理状态并提示
             inputEl.value = '';
             const msg = document.getElementById('success-msg');
             msg.classList.remove('hidden');
             setTimeout(() => { msg.classList.add('hidden'); }, 3000);
         } else {
-            alert('请先输入你要补充的观点或词汇哦！');
+            alert('请先输入你要补充的观点哦！');
         }
     });
 
-    // 监听窗口缩放，自适应图表
     window.addEventListener('resize', function() {
         myChart.resize();
     });
