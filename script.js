@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 导入基于访谈记录提取的真实关键词与权重
+    
     let wordData = {
         station: [
             { name: '手机“滴”一下', value: 95 },
