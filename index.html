@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>街采任务汇总 - 概念地图与词云</title>
+    <title>街采任务汇总 - 智慧国与民众心声</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
@@ -11,56 +11,61 @@
 <body>
 
     <header class="header">
-        <h1>📍 街头麦克风：城市场景与民众声音</h1>
-        <p>将鼠标悬停在下方的场所图标上，即可探索该地点的街访高频词汇。</p>
+        <h1>📍 智慧国街采图鉴：城市场景与民众声音</h1>
+        <p>将鼠标悬停在下方的场所图标上，探索受访者在该场景下的真实反馈与高频词汇。</p>
     </header>
 
     <div class="dashboard">
         <div class="icon-map-section">
             <div class="icon-item" data-loc="station">
                 <div class="icon-emoji">🚆</div>
-                <div class="icon-text">车站</div>
-            </div>
-            <div class="icon-item" data-loc="hospital">
-                <div class="icon-emoji">🏥</div>
-                <div class="icon-text">医院</div>
+                <div class="icon-text">交通车站</div>
             </div>
             <div class="icon-item" data-loc="hawker">
-                <div class="icon-emoji">🍜</div>
-                <div class="icon-text">小贩中心</div>
+                <div class="icon-emoji">☕</div>
+                <div class="icon-text">餐饮小贩</div>
             </div>
-            <div class="icon-item" data-loc="community">
-                <div class="icon-emoji">🏘️</div>
-                <div class="icon-text">社区中心</div>
+            <div class="icon-item" data-loc="home">
+                <div class="icon-emoji">🏠</div>
+                <div class="icon-text">居家生活</div>
+            </div>
+            <div class="icon-item" data-loc="workplace">
+                <div class="icon-emoji">🏢</div>
+                <div class="icon-text">办公场所</div>
             </div>
             <div class="icon-item" data-loc="school">
                 <div class="icon-emoji">🏫</div>
-                <div class="icon-text">学校</div>
+                <div class="icon-text">学校教育</div>
+            </div>
+            <div class="icon-item" data-loc="hospital">
+                <div class="icon-emoji">🏥</div>
+                <div class="icon-text">医疗政务</div>
             </div>
         </div>
 
         <div class="content-section">
             <div class="cloud-display">
                 <h2 id="cloud-title">请将鼠标悬停在上方图标</h2>
-                <div id="word-cloud-container" style="width: 100%; height: 300px;"></div>
+                <div id="word-cloud-container" style="width: 100%; height: 350px;"></div>
             </div>
 
             <div class="add-word-form">
                 <h3>✨ 补充关键词</h3>
-                <p class="form-desc">受访者提到了新的有趣观点？立即添加到词云中！</p>
+                <p class="form-desc">发现新的有趣观点？立即添加到词云中！</p>
                 <div class="input-container">
                     <label for="loc-select">选择地点：</label>
                     <select id="loc-select">
-                        <option value="station">车站</option>
-                        <option value="hospital">医院</option>
-                        <option value="hawker">小贩中心</option>
-                        <option value="community">社区中心</option>
-                        <option value="school">学校</option>
+                        <option value="station">🚆 交通车站</option>
+                        <option value="hawker">☕ 餐饮小贩</option>
+                        <option value="home">🏠 居家生活</option>
+                        <option value="workplace">🏢 办公场所</option>
+                        <option value="school">🏫 学校教育</option>
+                        <option value="hospital">🏥 医疗政务</option>
                     </select>
                 </div>
                 <div class="input-container">
                     <label for="new-word-input">新增词汇：</label>
-                    <input type="text" id="new-word-input" placeholder="输入你想补充的词汇...">
+                    <input type="text" id="new-word-input" placeholder="输入受访者提到的观点...">
                 </div>
                 <button id="add-word-btn">一键添加并更新</button>
                 <p id="success-msg" class="hidden">✅ 关键词已成功添加，词云已刷新！</p>
