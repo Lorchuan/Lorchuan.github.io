@@ -3,32 +3,29 @@ document.addEventListener('DOMContentLoaded', function() {
     let wordData = {
         station: [
             { name: '手机“滴”一下', value: 95 },
-            { name: '碰一碰', value: 90 },
-            { name: '告别实体公交卡', value: 85 },
+            { name: '“碰一碰”', value: 90 },
+            { name: '告别实体卡', value: 85 },
             { name: '无感支付', value: 85 },
             { name: '自动化交通系统', value: 80 },
-            { name: '不用数现金找零', value: 75 },
+            { name: '自动找零', value: 75 },
             { name: '车站全覆盖空调', value: 65 },
             { name: '多语言播报', value: 60 },
             { name: '缩短通勤时间', value: 55 },
-            { name: '拉近心理距离', value: 50 },
             { name: '刷脸乘车', value: 45 }
         ],
         hawker: [
-            { name: '告别钱包钥匙', value: 95 },
+            { name: '告别钱包', value: 95 },
             { name: '扫码点单', value: 90 },
-            { name: '追求极致效率', value: 85 },
+            { name: '智能点餐助手', value: 90 },
+            { name: '极致效率', value: 85 },
             { name: '缺少人情味', value: 85 },
             { name: 'Kiasu(怕输)文化', value: 80 },
             { name: '自动化点单机', value: 75 },
             { name: 'App打折优惠', value: 70 },
             { name: '机器取代咖啡师', value: 65 },
-            { name: '跟风怕吃亏', value: 60 },
-            { name: '询问食材新鲜度', value: 50 },
-            { name: '询问菜品口味', value: 50 }
         ],
         home: [
-            { name: '扫地机器人', value: 100 },
+            { name: '扫地机器人', value: 90 },
             { name: 'Singpass数字身份', value: 95 },
             { name: '解决家务烦恼', value: 90 },
             { name: '手机办理政务', value: 85 },
@@ -36,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { name: '适老化大字号', value: 70 },
             { name: '极简操作页面', value: 65 },
             { name: '智能洗衣机', value: 60 },
-            { name: '躺沙发看电视', value: 55 },
-            { name: '识别图片内容', value: 50 },
             { name: '早上语音叫醒', value: 45 }
         ],
         workplace: [
@@ -50,37 +45,34 @@ document.addEventListener('DOMContentLoaded', function() {
             { name: '工作成果专业化', value: 75 },
             { name: '机器翻译', value: 70 },
             { name: '辅助维修工作', value: 65 },
-            { name: 'Copilot', value: 60 },
+            { name: 'Copilot', value: 80 },
             { name: '豆包', value: 60 },
             { name: '总结文献', value: 55 },
-            { name: '查找工作邮件', value: 50 }
         ],
         school: [
             { name: '秒解不会难题', value: 95 },
-            { name: '充当学习小帮手', value: 90 },
             { name: '颠覆传统教法', value: 85 },
             { name: '担忧不良内容渗透', value: 80 },
             { name: '节约教育成本', value: 75 },
             { name: '改变未来规划', value: 70 },
-            { name: '提供全新解题思路', value: 65 },
+            { name: '提供全新思路', value: 65 },
             { name: 'AI描述生成图片', value: 60 },
-            { name: '网上查阅资料', value: 55 },
-            { name: '制作爱心义卖海报', value: 50 },
+            { name: '查阅资料', value: 75 },
+            { name: '制作海报', value: 50 },
             { name: '智能白板', value: 45 }
         ],
         hospital: [
             { name: '人类医生把关决策', value: 95 },
             { name: '隐私与效率的折中', value: 95 },
-            { name: '享受极致便利', value: 90 },
-            { name: '人机协作共存', value: 90 },
-            { name: 'AI辅助问诊建言', value: 85 },
+            { name: '极致便利', value: 90 },
+            { name: '人机协作', value: 90 },
+            { name: 'AI辅助问诊', value: 85 },
             { name: '接受位置轨迹追踪', value: 85 },
             { name: '年轻人反哺教老人', value: 80 },
             { name: '消费习惯记录', value: 70 },
             { name: '税收政策秒回', value: 65 },
             { name: '分析病人综合资料', value: 60 },
             { name: '担忧身份证号泄露', value: 55 },
-            { name: '仔细阅读隐私条款', value: 50 }
         ]
     };
 
