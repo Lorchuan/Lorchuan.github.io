@@ -61,6 +61,7 @@
             height: 90px; 
             object-fit: cover; 
             background-color: #eee; 
+            cursor: pointer; /* 鼠标放上去显示小手 */
         }
         
         /* 时间 */
@@ -100,6 +101,31 @@
             font-size: 12px; 
             line-height: 1.8;
             color: #576b95;
+        }
+
+        /* --- 新增：图片全屏查看的弹窗（Lightbox）样式 --- */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* 黑色背景 */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* 提示点击可关闭 */
+        }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            animation: zoomIn 0.2s ease; /* 简单的弹出动画 */
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
@@ -142,5 +168,30 @@
             </div>
         </div>
     </div>
+
+    <div id="imageModal" class="modal">
+        <img id="fullImage" src="" alt="全屏大图">
+    </div>
+
+    <script>
+        // 获取所有的朋友圈小图
+        const thumbnails = document.querySelectorAll('.images img');
+        // 获取弹窗和弹窗里的大图
+        const modal = document.getElementById('imageModal');
+        const fullImage = document.getElementById('fullImage');
+
+        // 给每个小图加上点击事件
+        thumbnails.forEach(img => {
+            img.addEventListener('click', function() {
+                fullImage.src = this.src; // 把被点击的小图的src赋给大图
+                modal.style.display = 'flex'; // 显示黑底弹窗
+            });
+        });
+
+        // 点击黑底或大图时，关闭弹窗
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
