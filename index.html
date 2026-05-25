@@ -2,77 +2,133 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>清华大学无穹书院NEXUS AI支队街采展示页</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>朋友圈</title>
+    <style>
+        /* 基础页面设置 */
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+            background-color: #ffffff; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .moment { 
+            display: flex; 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        
+        /* 头像 */
+        .avatar { 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 4px; 
+            background-color: #eee; 
+            margin-right: 12px; 
+            object-fit: cover; 
+            flex-shrink: 0;
+        }
+        
+        /* 右侧内容区 */
+        .content { 
+            flex: 1; 
+        }
+        .name { 
+            color: #576b95; 
+            font-size: 17px; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+        }
+        .text { 
+            font-size: 16px; 
+            color: #111; 
+            margin-bottom: 12px; 
+            line-height: 1.5; 
+            word-wrap: break-word; 
+            white-space: pre-wrap; /* 保留文字换行 */
+        }
+        
+        /* 四张图片的四宫格布局 */
+        .images { 
+            display: grid; 
+            grid-template-columns: repeat(2, 90px); 
+            gap: 5px; 
+            margin-bottom: 12px; 
+        }
+        .images img { 
+            width: 90px; 
+            height: 90px; 
+            object-fit: cover; 
+            background-color: #eee; 
+        }
+        
+        /* 时间 */
+        .time { 
+            font-size: 13px; 
+            color: #b2b2b2; 
+            margin-bottom: 12px; 
+        }
+        
+        /* 点赞区 */
+        .interaction { 
+            background-color: #f3f3f5; 
+            padding: 8px 10px; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            color: #576b95; 
+            position: relative; 
+        }
+        /* 点赞区上方的小三角 */
+        .interaction::before { 
+            content: ""; 
+            position: absolute; 
+            top: -10px; 
+            left: 12px; 
+            border-width: 5px; 
+            border-style: solid; 
+            border-color: transparent transparent #f3f3f5 transparent; 
+        }
+        .likes { 
+            display: flex; 
+            align-items: flex-start; 
+            line-height: 1.6; 
+            font-weight: 600;
+        }
+        .heart { 
+            margin-right: 6px; 
+            font-size: 12px; 
+            line-height: 1.8;
+            color: #576b95;
+        }
+    </style>
 </head>
 <body>
-
-    <header class="header">
-        <h1>听听两国人民怎么说：AI理想社会与“智慧国”的蓝图</h1>
-        <p>将鼠标悬停在下方的场所图标上，探索受访者在该场景下的真实反馈与高频词汇。</p>
-    </header>
-
-    <div class="dashboard">
-        <div class="icon-map-section">
-            <div class="icon-item" data-loc="station">
-                <div class="icon-emoji">🚆</div>
-                <div class="icon-text">交通车站</div>
+    <div class="moment">
+        <img class="avatar" src="avatar.jpg" alt="头像">
+        
+        <div class="content">
+            <div class="name">他的微信昵称</div>
+            
+            <div class="text">这里填入他朋友圈的一段文字。
+这段代码支持自动换行，你直接在这里按回车换行即可在网页上生效。</div>
+            
+            <div class="images">
+                <img src="img1.jpg" alt="图1">
+                <img src="img2.jpg" alt="图2">
+                <img src="img3.jpg" alt="图3">
+                <img src="img4.jpg" alt="图4">
             </div>
-            <div class="icon-item" data-loc="hawker">
-                <div class="icon-emoji">☕</div>
-                <div class="icon-text">餐饮小贩</div>
-            </div>
-            <div class="icon-item" data-loc="home">
-                <div class="icon-emoji">🏠</div>
-                <div class="icon-text">居家生活</div>
-            </div>
-            <div class="icon-item" data-loc="workplace">
-                <div class="icon-emoji">🏢</div>
-                <div class="icon-text">办公场所</div>
-            </div>
-            <div class="icon-item" data-loc="school">
-                <div class="icon-emoji">🏫</div>
-                <div class="icon-text">学校教育</div>
-            </div>
-            <div class="icon-item" data-loc="hospital">
-                <div class="icon-emoji">🏥</div>
-                <div class="icon-text">医疗政务</div>
-            </div>
-        </div>
-
-        <div class="content-section">
-            <div class="cloud-display">
-                <h2 id="cloud-title">请将鼠标悬停在上方图标</h2>
-                <div id="word-cloud-container" style="width: 100%; height: 350px;"></div>
-            </div>
-
-            <div class="add-word-form">
-                <h3>✨ 补充关键词</h3>
-                <p class="form-desc">发现新的有趣观点？立即添加到词云中！</p>
-                <div class="input-container">
-                    <label for="loc-select">选择地点：</label>
-                    <select id="loc-select">
-                        <option value="station">🚆 交通车站</option>
-                        <option value="hawker">☕ 餐饮小贩</option>
-                        <option value="home">🏠 居家生活</option>
-                        <option value="workplace">🏢 办公场所</option>
-                        <option value="school">🏫 学校教育</option>
-                        <option value="hospital">🏥 医疗政务</option>
-                    </select>
+            
+            <div class="time">2小时前</div>
+            
+            <div class="interaction">
+                <div class="likes">
+                    <span class="heart">♡</span>
+                    张三, 李四, 王五, 你的名字, 赵六
                 </div>
-                <div class="input-container">
-                    <label for="new-word-input">新增词汇：</label>
-                    <input type="text" id="new-word-input" placeholder="输入观点...">
-                </div>
-                <button id="add-word-btn">一键添加并更新</button>
-                <p id="success-msg" class="hidden">✅ 关键词已成功添加，词云已刷新！</p>
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
