@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lorchuan.github.io/sitemap.xml

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>朋友圈</title>
+    <style>
+        /* 基础页面设置 */
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+            background-color: #ffffff; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .moment { 
+            display: flex; 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        
+        /* 头像 */
+        .avatar { 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 4px; 
+            background-color: #eee; 
+            margin-right: 12px; 
+            object-fit: cover; 
+            flex-shrink: 0;
+        }
+        
+        /* 右侧内容区 */
+        .content { 
+            flex: 1; 
+        }
+        .name { 
+            color: #576b95; 
+            font-size: 17px; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+        }
+        .text { 
+            font-size: 16px; 
+            color: #111; 
+            margin-bottom: 12px; 
+            line-height: 1.5; 
+            word-wrap: break-word; 
+            white-space: pre-wrap; /* 保留文字换行 */
+        }
+        
+        /* 四张图片的四宫格布局 */
+        .images { 
+            display: grid; 
+            grid-template-columns: repeat(2, 90px); 
+            gap: 5px; 
+            margin-bottom: 12px; 
+        }
+        .images img { 
+            width: 90px; 
+            height: 90px; 
+            object-fit: cover; 
+            background-color: #eee; 
+            cursor: pointer; /* 鼠标放上去显示小手 */
+        }
+        
+        /* 时间 */
+        .time { 
+            font-size: 13px; 
+            color: #b2b2b2; 
+            margin-bottom: 12px; 
+        }
+        
+        /* 点赞区 */
+        .interaction { 
+            background-color: #f3f3f5; 
+            padding: 8px 10px; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            color: #576b95; 
+            position: relative; 
+        }
+        /* 点赞区上方的小三角 */
+        .interaction::before { 
+            content: ""; 
+            position: absolute; 
+            top: -10px; 
+            left: 12px; 
+            border-width: 5px; 
+            border-style: solid; 
+            border-color: transparent transparent #f3f3f5 transparent; 
+        }
+        .likes { 
+            display: flex; 
+            align-items: flex-start; 
+            line-height: 1.6; 
+            font-weight: 600;
+        }
+        .heart { 
+            margin-right: 6px; 
+            font-size: 12px; 
+            line-height: 1.8;
+            color: #576b95;
+        }
+
+        /* --- 新增：图片全屏查看的弹窗（Lightbox）样式 --- */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* 黑色背景 */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* 提示点击可关闭 */
+        }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            animation: zoomIn 0.2s ease; /* 简单的弹出动画 */
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="moment">
+        <img class="avatar" src="../avatar.jpg" alt="头像">
+        
+        <div class="content">
+            <div class="name">Persona</div>
+            
+            <div class="text">主题团日～完结撒花[转圈][转圈]
+（P1是那天因为时间缘故没有来得及进行的“自由交流”环节的背景PPT[玫瑰]）
+
+    人们常说AI时代要来了，教育范式要变了，许多人要失业了。史纲的夏清老师说，复杂问题的解释本身就是一种解决。从党课小组第一次读书会到现在，我们一直都在尝试解释这一问题。
+    我还记得五一回家的那些日子(P2），平凡的山城里，无边的青翠与落霞日复一日轮现，带给我的是日复一日的宁静平和。仿佛无论世界有没有AI，这里的灯火都不会受到打扰。
+    2022年高考季，新雅书院的宣传片中，老师们指出了新时代人才培养的一个答案：“渊博雅正，通识为先”。
+    文史政经哲、计工理化生，样样精巧、样样交叉，谦谦君子、上知天文下知地理，遇事则降维打击、遇人则协同八方。无论最终落实情形如何，这一理念都是极先进的。
+    事在人为，事因人的存在而有意义。技术快速变化的时代，人的需求是判断对与不对的唯一锚点，人与人的链接始终是核心。这也是团日中学长分享里提到“产品经理的地位不降反升”的底层逻辑。新雅的通识君子理念，回应了对人的关切。
+    2025年，无穹书院成立，提出“用最AI的方式培养最具创新能力的AI领军人才”。对普通人而言，AI像一台超级浏览器，能够搜索并回答几乎任何你不知道的知识，甚至能帮你处理很多文书工作。在产业界，产品迭代的周期也因此大大缩短。可以说，AI正是通识人才成长的沃土，在其辅助下，人能以效率高的多的方式学习知识。
+    不久前我也听过两位学长讨论这个问题。老学长（看起来已毕业几十年）较慷慨地认为如果大二大三学传统的人工智能专业课，其实和计算机系没有什么区别，并且AI在辅助学习各个领域知识的功能就连高中生也可以掌握。另一名学长（大四，想做AI+医学）则反驳道他高中以及大一大二大三的时候并不知道（或者说不相信）自己可以有这个本事。
+    无穹的学生有没有意识到自己可以有这个本事呢？是不是最终应该有一个独属于自己的、AI深度参与的、能和现有知识获取手段（如线下上课、纸质图书）相衔接的，知识资产积累模式？如果是必要的，建立这个模式的过程中同学自己、书院老师应该起到怎样的作用？
+    渊博雅正，通识为先，不会因为我们不是新雅的学生就不再适用；用最AI的方式成长进步成为领军人才，不是自我感动的口号。愿无穹书院越来越好！
+
+    （P3、P4是什么你别管[旺柴][机智]</div>
+            
+            <div class="images">
+                <img src="../img1.jpg" alt="图1">
+                <img src="../img2.jpg" alt="图2">
+                <img src="../img3.jpg" alt="图3">
+                <img src="../img4.jpg" alt="图4">
+            </div>
+            
+            <div class="time">2小时前</div>
+            
+            <div class="interaction">
+                <div class="likes">
+                    <span class="heart">♡</span>
+                    所有人
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <img id="fullImage" src="" alt="全屏大图">
+    </div>
+
+    <script>
+        // 获取所有的朋友圈小图
+        const thumbnails = document.querySelectorAll('.images img');
+        // 获取弹窗和弹窗里的大图
+        const modal = document.getElementById('imageModal');
+        const fullImage = document.getElementById('fullImage');
+
+        // 给每个小图加上点击事件
+        thumbnails.forEach(img => {
+            img.addEventListener('click', function() {
+                fullImage.src = this.src; // 把被点击的小图的src赋给大图
+                modal.style.display = 'flex'; // 显示黑底弹窗
+            });
+        });
+
+        // 点击黑底或大图时，关闭弹窗
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
