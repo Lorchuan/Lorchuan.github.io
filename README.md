@@ -23,7 +23,7 @@ Open `http://localhost:8765/`.
 
 ## Updating
 
-- `index.html`: content; Chinese text is in the HTML, with English translations in `data-en` attributes. Image translations use `data-en-alt`.
+- `index.html`: English is the default static content; bilingual text uses `data-en` and `data-zh` attributes. Image translations use `data-en-alt` and `data-zh-alt`.
 - `styles.css`: responsive layout and print styles.
 - `script.js`: language preference, image viewer, clipboard and navigation.
 - `assets/`: optimized photographs and favicon. Original private resume files are not included.

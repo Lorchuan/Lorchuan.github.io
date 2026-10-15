@@ -1,9 +1,10 @@
 const languageButton = document.querySelector('#language');
 const translatable = [...document.querySelectorAll('[data-en]')];
 const translatedImages = [...document.querySelectorAll('[data-en-alt]')];
-translatable.forEach(el => { el.dataset.zh = el.textContent; });
-translatedImages.forEach(el => { el.dataset.zhAlt = el.alt; });
-let language = 'zh';
+translatable.forEach(el => { if (!el.dataset.zh) el.dataset.zh = el.textContent; });
+translatedImages.forEach(el => { if (!el.dataset.zhAlt) el.dataset.zhAlt = el.alt; });
+const languagePreferenceKey = 'bt-language-v2';
+let language = 'en';
 function setLanguage(next) {
   language = next === 'en' ? 'en' : 'zh';
   document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
@@ -12,9 +13,9 @@ function setLanguage(next) {
   languageButton.innerHTML = language === 'en' ? '中文 <span aria-hidden="true">↗</span>' : 'EN <span aria-hidden="true">↗</span>';
   languageButton.setAttribute('aria-label', language === 'en' ? '切换为中文' : 'Switch to English');
   document.querySelector('#copy-status').textContent = '';
-  try { localStorage.setItem('bt-language', language); } catch {}
+  try { localStorage.setItem(languagePreferenceKey, language); } catch {}
 }
-try { setLanguage(localStorage.getItem('bt-language') || 'zh'); } catch { setLanguage('zh'); }
+try { setLanguage(localStorage.getItem(languagePreferenceKey) || 'en'); } catch { setLanguage('en'); }
 languageButton.addEventListener('click', () => setLanguage(language === 'zh' ? 'en' : 'zh'));
 
 const lightbox = document.querySelector('#lightbox');
